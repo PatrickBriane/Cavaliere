@@ -1,0 +1,95 @@
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.transparent-bg {
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.solid-bg {
+  background-color: #18120F;
+  position: relative;
+  padding: 10px 40px 10px 25px;
+}
+
+.header-left,
+.header-center,
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-left {
+  gap: 12px;
+}
+
+.logo-small {
+  height: 56px;
+  width: auto;
+}
+
+.about-text {
+  font-family: var(--heading);
+  font-size: 14px;
+  letter-spacing: 1px;
+  margin-top: 10px;
+}
+
+.header-center {
+  gap: 15px;
+}
+
+.logo-main {
+  height: 80px;
+  width: auto;
+  margin-left: -30px;
+}
+
+.brand-name {
+  font-family: var(--heading);
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: 8px;
+  margin: 0;
+}
+
+.header-tagline {
+  font-family: var(--heading);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.header-right {
+  gap: 24px;
+}
+
+.header-button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-button img {
+  width: 24px;
+  height: 24px;
+}
+
+.icon-placeholder {
+  font-size: 24px;
+  cursor: pointer;
+}

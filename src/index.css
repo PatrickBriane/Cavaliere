@@ -1,0 +1,37 @@
+:root {
+  --bg: #1f160d;
+  --text: #f3f4f6;
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: 'Cinzel', serif;
+  --mono: ui-monospace, Consolas, monospace;
+}
+
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--heading);
+  margin-top: 0;
+}

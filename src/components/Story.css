@@ -1,0 +1,40 @@
+.story-section {
+    background-color: white;
+    padding: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+}
+
+.story-section a{
+    text-decoration: none;
+    display: block;
+    color: inherit;
+    font-family: var(--heading);
+    border: 0;
+}
+
+.story-section img{
+    border-radius: 40px;
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border: 6px solid #F2AA60;
+}
+
+.story-image-container {
+    position: relative;
+}
+
+.story-text {
+    font-size: clamp(10px, 1.2vw, 20px);
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    text-decoration: underline;
+}
