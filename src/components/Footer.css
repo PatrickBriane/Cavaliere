@@ -32,12 +32,33 @@
     gap: 50px; 
     width: fit-content;
     transition: all 0.3s;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    text-align: left;
+}
+
+.footer-header {
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    width: fit-content;
+    font-weight: 700;
+    cursor: default;
+    user-select: none;
+}
+
+.footer-header p {
+    font-weight: 700;
 }
 
 .footer-links-container div .head-link{
     font-weight: 700;
 }
-
 
 .footer-links-container .separator {
     width: 1px;
@@ -171,4 +192,4 @@
     font-weight: 700;
     font-size: 15px;
 }
-
+

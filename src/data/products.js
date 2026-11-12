@@ -1,0 +1,103 @@
+import Jacket from '../assets/SHOP LISTING/IMAGES/JACKET.png'
+import Blousun from '../assets/SHOP LISTING/IMAGES/BLOUSUN.png'
+import Cuffs from '../assets/SHOP LISTING/IMAGES/CUFFS.png'
+import Harness from '../assets/SHOP LISTING/IMAGES/HARNESS.png'
+import Chrono from '../assets/SHOP LISTING/IMAGES/CHRONO.png'
+import Casquette from '../assets/SHOP LISTING/IMAGES/CASQUETTE.png'
+import DetailBanner from '../assets/PRODUCT DETAIL/IMAGES/PRODUCT-DETAIL-BANNER.jpg'
+
+export const products = [
+  {
+    id: 1,
+    slug: 'leather-jacket',
+    name: 'Leather Jacket',
+    edition: '2026 Winter-Fall Edition',
+    price: 15000,
+    category: ['OUTERWEAR', "MEN'S", 'TAILORING', 'NEW ARRIVALS'],
+    image: Jacket,
+    detailImage: DetailBanner,
+    description: `This season, Cavalière unveils a collection of impeccably tailored coats, structured suits, and luxurious essentials designed for the modern individual who moves with confidence and intention.\n\nInspired by the quiet strength of the Cavalière emblem, the collection celebrates discipline, grace, and the art of dressing with purpose.`,
+    materials: ['Full-grain calfskin leather', 'Quilted silk interior lining', 'Heritage brass hardware', 'Reinforced stitched seams'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    fit: 'Regular fit. Model is 5\'10" and wears size M.',
+    availability: 'Available in-store at all Cavalière boutiques and online.',
+  },
+  {
+    id: 2,
+    slug: 'plonge-blouson',
+    name: 'Plongé Blouson',
+    edition: '2026 Winter-Fall Edition',
+    price: 12500,
+    category: ['OUTERWEAR', "WOMEN'S"],
+    image: Blousun,
+    detailImage: DetailBanner,
+    description: `Butter-soft plongé leather blouson with an effortless drape and refined matte finish, crafted for the discerning individual who values both comfort and elegance.\n\nEach blouson is individually finished by hand and carries the Cavalière embossed seal on the interior collar.`,
+    materials: ['Plongé lambskin leather', 'Viscose lining', 'Hand-finished edges', 'Antique silver zipper'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    fit: 'Relaxed fit. Model is 6\'0" and wears size L.',
+    availability: 'Available in-store and online. Limited quantities.',
+  },
+  {
+    id: 3,
+    slug: 'shearling-cuffs',
+    name: 'Shearling Cuffs',
+    edition: '2026 Winter-Fall Edition',
+    price: 5500,
+    category: ['ACCESSORIES', "WOMEN'S", 'NEW ARRIVALS'],
+    image: Cuffs,
+    detailImage: DetailBanner,
+    description: `Sumptuous shearling-lined cuffs crafted from supple nappa leather for structured elegance. A statement accessory that transforms any ensemble.\n\nThe interior shearling is ethically sourced and treated to maintain its natural loft and warmth across seasons.`,
+    materials: ['Nappa leather exterior', 'Ethically sourced shearling interior', 'Hand-rolled edges', 'Concealed snap closure'],
+    sizes: ['One Size'],
+    fit: 'One-size-fits-most. Adjustable snap closure.',
+    availability: 'Available in select boutiques and online.',
+  },
+  {
+    id: 4,
+    slug: 'leather-harness',
+    name: 'Leather Harness',
+    edition: '2026 Winter-Fall Edition',
+    price: 8800,
+    category: ['ACCESSORIES', 'FOOTWEAR', "MEN'S"],
+    image: Harness,
+    detailImage: DetailBanner,
+    description: `Architectural leather harness with adjustable buckle detailing and heritage-engraved clasps. Designed to be worn over tailored garments, it redefines formal dressing.\n\nThe harness is fully adjustable and reinforced at all stress points with double stitching.`,
+    materials: ['Veg-tanned leather straps', 'Engraved brass buckles', 'Saddle-stitched details', 'Suede back panels'],
+    sizes: ['S/M', 'L/XL'],
+    fit: 'Fully adjustable. Worn over outerwear or tailoring.',
+    availability: 'In-store only at Cavalière flagship boutiques.',
+  },
+  {
+    id: 5,
+    slug: 'heritage-chrono',
+    name: 'Heritage Chrono',
+    edition: '2026 Winter-Fall Edition',
+    price: 28000,
+    category: ['TIMEPIECES', 'ACCESSORIES', "MEN'S", "WOMEN'S"],
+    image: Chrono,
+    detailImage: DetailBanner,
+    description: `The Heritage Chrono embodies Cavalière's devotion to horological excellence. A Swiss-movement chronograph encased in a 40mm hand-brushed stainless case with sapphire crystal glass.\n\nEvery timepiece is individually numbered and accompanied by a certificate of authenticity.`,
+    materials: ['316L surgical steel case', 'Sapphire crystal glass', 'Full-grain leather strap', 'Swiss automatic movement'],
+    sizes: ['40mm case diameter'],
+    fit: 'Universal fit. Adjustable leather strap.',
+    availability: 'Available in select boutiques. Pre-order online.',
+  },
+  {
+    id: 6,
+    slug: 'nappa-casquette',
+    name: 'Nappa Casquette',
+    edition: '2026 Winter-Fall Edition',
+    price: 4200,
+    category: ['ACCESSORIES', "MEN'S", 'NEW ARRIVALS'],
+    image: Casquette,
+    detailImage: DetailBanner,
+    description: `A structured nappa leather casquette with a stiffened brim and heritage lining. The quintessential Cavalière cap — understated, precise, deliberate.\n\nThe cap is internally lined with the Cavalière monogram jacquard fabric.`,
+    materials: ['Nappa leather crown', 'Stiffened leather brim', 'Monogram jacquard lining', 'Adjustable leather strap'],
+    sizes: ['S', 'M', 'L'],
+    fit: 'Structured fit. Adjustable back strap.',
+    availability: 'Available in-store and online.',
+  },
+]
+
+export const getProductBySlug = (slug) => products.find(p => p.slug === slug)
+export const getProductById = (id) => products.find(p => p.id === Number(id))

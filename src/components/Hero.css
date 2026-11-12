@@ -27,7 +27,6 @@
   text-align: center;
 }
 
-
 .hero-title {
   font-family: var(--heading);
   font-size: 70px;
@@ -63,6 +62,22 @@
   opacity: 0.9;
   margin-bottom: 20px;
   transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.arrow-down-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.arrow-down-btn:hover {
+  transform: translateY(3px);
 }
 
 .arrow-down {

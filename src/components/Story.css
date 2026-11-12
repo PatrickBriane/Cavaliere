@@ -8,7 +8,7 @@
     gap: 100px;
 }
 
-.story-section a{
+.story-section a {
     text-decoration: none;
     display: block;
     color: inherit;
@@ -16,13 +16,13 @@
     border: 0;
 }
 
-.story-section img{
+.story-section img {
     border-radius: 40px;
     display: block;
     width: 100%;
     height: auto;
     object-fit: cover;
-    border: 6px solid #F2AA60;
+    border: 6px solid #8d624a;
 }
 
 .story-image-container {

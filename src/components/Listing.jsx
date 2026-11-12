@@ -1,3 +1,4 @@
+import { useSearchParams, Link } from 'react-router-dom'
 import './Listing.css'
 import Header from './Header.jsx'
 import ListingHero from '../assets/SHOP LISTING/IMAGES/COLLECTION-BANNER.jpg'
@@ -6,25 +7,43 @@ import NextIcon from '../assets/SHOP LISTING/ICONS/RIGHT-ARROW.svg'
 import Product1 from '../assets/SHOP LISTING/IMAGES/FEATURED-ONE.png'
 import Product2 from '../assets/SHOP LISTING/IMAGES/FEATURED-TWO.png'
 import Product3 from '../assets/SHOP LISTING/IMAGES/FEATURED-THREE.png'
-import LeatherHarness from '../assets/SHOP LISTING/IMAGES/HARNESS.png'
-import HeritageChrono from '../assets/SHOP LISTING/IMAGES/CHRONO.png'
-import NappaCasquette from '../assets/SHOP LISTING/IMAGES/CASQUETTE.png'
-import Jacket from '../assets/SHOP LISTING/IMAGES/JACKET.png'
-import Cuffs from '../assets/SHOP LISTING/IMAGES/CUFFS.png'
-import Blousun from '../assets/SHOP LISTING/IMAGES/BLOUSUN.png'
 import HeartIcon from '../assets/SHOP LISTING/ICONS/HEART.svg'
+import CartIcon from '../assets/ICONS/SHOPPING-CART.svg'
+import { products } from '../data/products.js'
 
+const categories = [
+    'THE COLLECTION',
+    'OUTERWEAR',
+    'TAILORING',
+    'FOOTWEAR',
+    'TIMEPIECES',
+    'ACCESSORIES',
+    'NEW ARRIVALS',
+    "MEN'S",
+    "WOMEN'S"
+]
 
-const collectionProducts = [
-    { id: 1, name: 'LEATHER JACKET', image: Jacket },
-    { id: 2, name: 'PLONGÉ BLOUSON', image: Blousun },
-    { id: 3, name: 'SHEARLING CUFFS', image: Cuffs },
-    { id: 4, name: 'LEATHER HARNESS', image: LeatherHarness },
-    { id: 5, name: 'HERITAGE CHRONO', image: HeritageChrono },
-    { id: 6, name: 'NAPPA CASQUETTE', image: NappaCasquette },
-];
+const collectionProducts = products.map(p => ({
+    id: p.id,
+    slug: p.slug,
+    name: p.name.toUpperCase(),
+    price: p.price,
+    category: p.category,
+    image: p.image,
+}))
 
 export default function Listing() {
+    const [searchParams, setSearchParams] = useSearchParams()
+    const activeCategory = searchParams.get('category') || 'THE COLLECTION'
+
+    const handleCategoryClick = (category) => {
+        setSearchParams({ category })
+    }
+
+    const filteredProducts = activeCategory === 'THE COLLECTION'
+        ? collectionProducts
+        : collectionProducts.filter(product => product.category.includes(activeCategory))
+
     return (
         <>
             <section className="listing-section" id="listing-section">
@@ -33,9 +52,9 @@ export default function Listing() {
                 </div>
 
                 <div className="carousel-container">
-                    <button className="carousel-button prev-button"><img src={PrevIcon} alt="Previous" /></button>
+                    <button className="carousel-button prev-button" aria-label="Previous"><img src={PrevIcon} alt="Previous" /></button>
                     <img src={ListingHero} alt="Cavaliere Listing Hero" className="carousel-image" />
-                    <button className="carousel-button next-button"><img src={NextIcon} alt="Next" /></button>
+                    <button className="carousel-button next-button" aria-label="Next"><img src={NextIcon} alt="Next" /></button>
                     
                     <div className="listing-featured-products">
                         <div className="featured-product">
@@ -53,29 +72,54 @@ export default function Listing() {
 
             <section className="listing-content">
                 <div className="categories-container">
-                    <a href="#" className="category-link active">THE COLLECTION</a>
-                    <a href="#" className="category-link">OUTERWEAR</a>
-                    <a href="#" className="category-link">TAILORING</a>
-                    <a href="#" className="category-link">FOOTWEAR</a>
-                    <a href="#" className="category-link">TIMEPIECES</a>
-                    <a href="#" className="category-link">ACCESSORIES</a>
+                    {categories.map((category) => (
+                        <button
+                            key={category}
+                            type="button"
+                            className={`category-link ${activeCategory === category ? 'active' : ''}`}
+                            onClick={() => handleCategoryClick(category)}
+                        >
+                            {category}
+                        </button>
+                    ))}
                 </div>
 
-                {/* 3-Column Collection Product Grid */}
                 <div className="product-grid">
-                    {collectionProducts.map((product) => (
-                        <div key={product.id} className="product-card">
-                            <button className="wishlist-btn" aria-label="Add to wishlist">
-                                <img src={HeartIcon} alt="Wishlist Icon" className="wishlist-icon" />
-                            </button>
-                            
-                            <div className="product-image-container">
-                                <img src={product.image} alt={product.name} className="product-img" />
-                            </div>
+                    {filteredProducts.length > 0 ? (
+                        filteredProducts.map((product) => (
+                            <Link key={product.id} to={`/product/${product.slug}`} className="product-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+                                <button className="wishlist-btn" aria-label="Add to wishlist" onClick={e => e.preventDefault()}>
+                                    <img src={HeartIcon} alt="Wishlist Icon" className="wishlist-icon" />
+                                </button>
+                                
+                                <div className="product-image-container">
+                                    <img src={product.image} alt={product.name} className="product-img" />
+                                </div>
 
-                            <p className="product-name">{product.name}</p>
+                                <div className="product-overlay-shadow" aria-hidden="true"></div>
+
+                                <div className="product-info-bottom">
+                                    <p className="product-name">{product.name}</p>
+                                    <p className="product-price">${Number(product.price).toFixed(2)}</p>
+                                </div>
+
+                                <button
+                                    className="product-cart-btn"
+                                    aria-label="Add to cart"
+                                    onClick={e => {
+                                        e.preventDefault()
+                                        e.stopPropagation()
+                                    }}
+                                >
+                                    <img src={CartIcon} alt="Add to cart" className="product-cart-icon" />
+                                </button>
+                            </Link>
+                        ))
+                    ) : (
+                        <div className="empty-category-message">
+                            <p>NO PRODUCTS FOUND IN THIS CATEGORY</p>
                         </div>
-                    ))}
+                    )}
                 </div>
             </section>
         </>
