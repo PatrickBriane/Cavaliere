@@ -143,3 +143,63 @@
   font-size: 24px;
   cursor: pointer;
 }
+
+@media (max-width: 900px) {
+  .header-tagline {
+    display: none;
+  }
+
+  .pd-header-variant {
+    padding: 16px 20px;
+  }
+
+  .pd-header-empty-left {
+    display: none;
+  }
+
+  .pd-header-right-btns {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .header-container {
+    padding: 16px 18px;
+  }
+
+  .solid-bg {
+    padding: 12px 18px;
+  }
+
+  .logo-small {
+    height: 40px;
+  }
+
+  .about-text {
+    font-size: 11px;
+    letter-spacing: 0.5px;
+  }
+
+  .header-right {
+    gap: 14px;
+  }
+
+  .header-button img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .brand-name {
+    font-size: 18px;
+    letter-spacing: 4px;
+  }
+
+  .logo-main {
+    height: 52px;
+    margin-left: -15px;
+  }
+
+  .pd-header-variant {
+    padding: 12px 14px;
+  }
+}

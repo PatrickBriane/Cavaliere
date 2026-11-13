@@ -56,8 +56,10 @@ export default function ProductDetail() {
   return (
     <div className="pd-page">
       <Header variant="product-detail" />
-      <div className="pd-left">
-        <img src={product.detailImage} alt={product.name} className="pd-hero-img" />
+      <div className="pd-left pd-left-item">
+        <div className="pd-item-bg-container">
+          <img src={product.image} alt={product.name} className="pd-item-product-img" />
+        </div>
         <div className="pd-img-dots">
           {[0, 1, 2].map(i => (
             <span key={i} className={`pd-dot ${i === 0 ? 'active' : ''}`} />

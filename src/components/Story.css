@@ -59,3 +59,25 @@
     right: 0;
     text-align: center;
 }
+
+@media (max-width: 768px) {
+    .story-section {
+        flex-direction: column;
+        padding: 40px 20px;
+        gap: 30px;
+    }
+
+    .story-section a {
+        max-width: 100%;
+    }
+
+    .story-section img {
+        border-radius: 24px;
+        border-width: 4px;
+    }
+
+    .story-text {
+        font-size: 13px;
+        bottom: 8px;
+    }
+}
