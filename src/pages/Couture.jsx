@@ -63,7 +63,14 @@ export default function Couture() {
 
       <div className="pd-right">
         <div className="pd-right-inner">
-          <button className="pd-back" onClick={() => navigate(-1)} aria-label="Go back">
+          <button
+            className="pd-back"
+            onClick={() => {
+              sessionStorage.setItem('cavaliere_scroll_restoring', 'true')
+              navigate(-1)
+            }}
+            aria-label="Go back"
+          >
             <img src={returnArrow} alt="Back" />
           </button>
 

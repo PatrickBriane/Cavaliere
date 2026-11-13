@@ -2,6 +2,15 @@
   min-height: 100vh;
   background-color: #f5ede0;
   color: #1a1008;
+  position: relative;
+}
+
+.cart-header-sticky {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
 }
 
 .cart-body {
@@ -143,7 +152,7 @@
   flex-shrink: 0;
   width: 320px;
   position: sticky;
-  top: 32px;
+  top: 132px;
 }
 
 .cart-summary-box {

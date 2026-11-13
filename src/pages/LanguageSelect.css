@@ -29,6 +29,25 @@
   padding: 18px 40px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.lang-close-btn {
+  background: transparent;
+  border: none;
+  color: #f3f4f6;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.lang-close-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
 }
 
 .lang-brand {

@@ -20,6 +20,10 @@ function Landing() {
 
   useEffect(() => {
     if (location.hash) {
+      if (sessionStorage.getItem('cavaliere_scroll_restoring') === 'true') {
+        sessionStorage.removeItem('cavaliere_scroll_restoring')
+        return
+      }
       const el = document.getElementById(location.hash.slice(1))
       if (el) {
         setTimeout(() => {
@@ -36,17 +40,24 @@ function Landing() {
         tagline="WHERE TRADITION WEARS A MONOCLE AND THE FUTURE WEARS CONFIDENCE."
       />
       <Hero />
-      <Listing />
-      <Story />
-      <Footer />
+      <div className="landing-sticky-wrapper">
+        <div className="listing-header">
+          <Header isSolid={true} />
+        </div>
+        <Listing hideHeader={true} />
+        <Story />
+        <Footer />
+      </div>
     </>
   )
 }
 
-export default function App() {
+function AnimatedRoutes() {
+  const location = useLocation()
+
   return (
-    <BrowserRouter>
-      <Routes>
+    <div key={location.pathname} className="page-fade-wrapper">
+      <Routes location={location}>
         <Route path="/" element={<Landing />} />
         <Route path="/explore" element={<Explore />} />
         <Route path="/collection" element={<Explore />} />
@@ -75,6 +86,14 @@ export default function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/product/:slug" element={<ProductDetail />} />
       </Routes>
+    </div>
+  )
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AnimatedRoutes />
     </BrowserRouter>
   )
 }

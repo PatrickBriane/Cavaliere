@@ -1,6 +1,7 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import './Header.css'
 import brandLogo from '../assets/ICONS/BRAND-LOGO.svg'
+import searchIcon from '../assets/ICONS/SEARCH-ICON.svg'
 import cartIcon from '../assets/ICONS/SHOPPING-CART.svg'
 import userIcon from '../assets/ICONS/USER-ICON.svg'
 import menuIcon from '../assets/ICONS/MENU-ICON.svg'
@@ -34,11 +35,14 @@ export default function Header({ isSolid, tagline, variant }) {
         </div>
 
         <div className="header-right pd-header-right-btns">
-          <button className="header-button" onClick={() => navigate('/cart')}>
+          <button className="header-button" aria-label="Search">
+            <img src={searchIcon} alt="Search" />
+          </button>
+          <button className="header-button" onClick={() => navigate('/cart')} aria-label="Cart">
             <img src={cartIcon} alt="Cart" />
           </button>
-          <button className="header-button"><img src={userIcon} alt="User" /></button>
-          <button className="header-button" onClick={() => navigate('/language')}>
+          <button className="header-button" aria-label="User"><img src={userIcon} alt="User" /></button>
+          <button className="header-button" onClick={() => navigate('/language')} aria-label="Menu">
             <img src={menuIcon} alt="Menu" />
           </button>
         </div>
@@ -74,11 +78,14 @@ export default function Header({ isSolid, tagline, variant }) {
       </div>
 
       <div className="header-right">
-        <button className="header-button" onClick={() => navigate('/cart')}>
+        <button className="header-button" aria-label="Search">
+          <img src={searchIcon} alt="Search" />
+        </button>
+        <button className="header-button" onClick={() => navigate('/cart')} aria-label="Cart">
           <img src={cartIcon} alt="Cart" />
         </button>
-        <button className="header-button"><img src={userIcon} alt="User" /></button>
-        <button className="header-button" onClick={() => navigate('/language')}>
+        <button className="header-button" aria-label="User"><img src={userIcon} alt="User" /></button>
+        <button className="header-button" onClick={() => navigate('/language')} aria-label="Menu">
           <img src={menuIcon} alt="Menu" />
         </button>
       </div>

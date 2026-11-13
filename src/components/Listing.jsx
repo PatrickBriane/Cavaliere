@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
 import './Listing.css'
 import Header from './Header.jsx'
@@ -8,6 +9,7 @@ import Product1 from '../assets/SHOP LISTING/IMAGES/FEATURED-ONE.png'
 import Product2 from '../assets/SHOP LISTING/IMAGES/FEATURED-TWO.png'
 import Product3 from '../assets/SHOP LISTING/IMAGES/FEATURED-THREE.png'
 import HeartIcon from '../assets/SHOP LISTING/ICONS/HEART.svg'
+import RedHeartIcon from '../assets/SHOP LISTING/ICONS/RED-HEART.svg'
 import CartIcon from '../assets/ICONS/SHOPPING-CART.svg'
 import { products } from '../data/products.js'
 
@@ -32,12 +34,22 @@ const collectionProducts = products.map(p => ({
     image: p.image,
 }))
 
-export default function Listing() {
+export default function Listing({ hideHeader }) {
     const [searchParams, setSearchParams] = useSearchParams()
+    const [wishlist, setWishlist] = useState({})
     const activeCategory = searchParams.get('category') || 'THE COLLECTION'
 
     const handleCategoryClick = (category) => {
         setSearchParams({ category })
+    }
+
+    const toggleWishlist = (productId, e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        setWishlist(prev => ({
+            ...prev,
+            [productId]: !prev[productId]
+        }))
     }
 
     const filteredProducts = activeCategory === 'THE COLLECTION'
@@ -47,9 +59,11 @@ export default function Listing() {
     return (
         <>
             <section className="listing-section" id="listing-section">
-                <div className="listing-header">
-                    <Header isSolid={true} />
-                </div>
+                {!hideHeader && (
+                    <div className="listing-header">
+                        <Header isSolid={true} />
+                    </div>
+                )}
 
                 <div className="carousel-container">
                     <button className="carousel-button prev-button" aria-label="Previous"><img src={PrevIcon} alt="Previous" /></button>
@@ -88,8 +102,17 @@ export default function Listing() {
                     {filteredProducts.length > 0 ? (
                         filteredProducts.map((product) => (
                             <Link key={product.id} to={`/product/${product.slug}`} className="product-card" style={{ textDecoration: 'none', color: 'inherit' }}>
-                                <button className="wishlist-btn" aria-label="Add to wishlist" onClick={e => e.preventDefault()}>
-                                    <img src={HeartIcon} alt="Wishlist Icon" className="wishlist-icon" />
+                                <button
+                                    type="button"
+                                    className={`wishlist-btn ${wishlist[product.id] ? 'active' : ''}`}
+                                    aria-label="Add to wishlist"
+                                    onClick={e => toggleWishlist(product.id, e)}
+                                >
+                                    <img
+                                        src={wishlist[product.id] ? RedHeartIcon : HeartIcon}
+                                        alt="Wishlist"
+                                        className="wishlist-icon-img"
+                                    />
                                 </button>
                                 
                                 <div className="product-image-container">

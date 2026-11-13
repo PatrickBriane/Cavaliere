@@ -35,7 +35,9 @@ export default function Cart() {
 
   return (
     <div className="cart-page">
-      <Header isSolid={true} />
+      <div className="cart-header-sticky">
+        <Header isSolid={true} />
+      </div>
 
       <div className="cart-body">
         <div className="cart-items-col">

@@ -11,8 +11,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
   box-sizing: border-box;
 }
 
@@ -22,7 +20,6 @@ body {
   background-color: var(--bg);
   color: var(--text);
   font-family: var(--sans);
-  overflow-x: hidden;
 }
 
 h1,
@@ -33,4 +30,18 @@ h5,
 h6 {
   font-family: var(--heading);
   margin-top: 0;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.page-fade-wrapper {
+  animation: pageFadeIn 0.35s ease-out forwards;
+  width: 100%;
 }
