@@ -12,6 +12,8 @@ import HeartIcon from '../assets/SHOP LISTING/ICONS/HEART.svg'
 import RedHeartIcon from '../assets/SHOP LISTING/ICONS/RED-HEART.svg'
 import CartIcon from '../assets/ICONS/SHOPPING-CART.svg'
 import { products } from '../data/products.js'
+import { addToCart } from '../data/cart.js'
+import { isWishlisted, toggleWishlistItem } from '../data/wishlist.js'
 
 const categories = [
     'THE COLLECTION',
@@ -36,20 +38,24 @@ const collectionProducts = products.map(p => ({
 
 export default function Listing({ hideHeader }) {
     const [searchParams, setSearchParams] = useSearchParams()
-    const [wishlist, setWishlist] = useState({})
+    const [wishlist, setWishlist] = useState(() => {
+        const map = {}
+        products.forEach(p => { map[p.id] = isWishlisted(p.id) })
+        return map
+    })
     const activeCategory = searchParams.get('category') || 'THE COLLECTION'
 
     const handleCategoryClick = (category) => {
         setSearchParams({ category })
     }
 
-    const toggleWishlist = (productId, e) => {
+    const toggleWishlist = (product, e) => {
         e.preventDefault()
         e.stopPropagation()
-        setWishlist(prev => ({
-            ...prev,
-            [productId]: !prev[productId]
-        }))
+        const raw = products.find(p => p.id === product.id)
+        if (!raw) return
+        const nowWishlisted = toggleWishlistItem(raw)
+        setWishlist(prev => ({ ...prev, [product.id]: nowWishlisted }))
     }
 
     const filteredProducts = activeCategory === 'THE COLLECTION'
@@ -106,7 +112,7 @@ export default function Listing({ hideHeader }) {
                                     type="button"
                                     className={`wishlist-btn ${wishlist[product.id] ? 'active' : ''}`}
                                     aria-label="Add to wishlist"
-                                    onClick={e => toggleWishlist(product.id, e)}
+                                    onClick={e => toggleWishlist(product, e)}
                                 >
                                     <img
                                         src={wishlist[product.id] ? RedHeartIcon : HeartIcon}
@@ -123,7 +129,7 @@ export default function Listing({ hideHeader }) {
 
                                 <div className="product-info-bottom">
                                     <p className="product-name">{product.name}</p>
-                                    <p className="product-price">${Number(product.price).toFixed(2)}</p>
+                                    <p className="product-price">₱{Number(product.price).toLocaleString()}.00</p>
                                 </div>
 
                                 <button
@@ -132,6 +138,8 @@ export default function Listing({ hideHeader }) {
                                     onClick={e => {
                                         e.preventDefault()
                                         e.stopPropagation()
+                                        const raw = products.find(p => p.id === product.id)
+                                        if (raw) addToCart(raw)
                                     }}
                                 >
                                     <img src={CartIcon} alt="Add to cart" className="product-cart-icon" />

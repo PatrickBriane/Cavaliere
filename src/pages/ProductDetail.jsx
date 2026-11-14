@@ -3,7 +3,10 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import './ProductDetail.css'
 import Header from '../components/Header.jsx'
 import { getProductBySlug } from '../data/products.js'
-import heartIcon from '../assets/PRODUCT DETAIL/ICONS/WHITE-HEART.svg'
+import { addToCart } from '../data/cart.js'
+import { isWishlisted, toggleWishlistItem } from '../data/wishlist.js'
+import WhiteHeartIcon from '../assets/PRODUCT DETAIL/ICONS/WHITE-HEART.svg'
+import RedHeartIcon from '../assets/SHOP LISTING/ICONS/RED-HEART.svg'
 import returnArrow from '../assets/PRODUCT DETAIL/ICONS/RETURN-ARROW.svg'
 
 const TABS = ['Description', 'Size & Fit', 'In-store Availability']
@@ -15,7 +18,27 @@ export default function ProductDetail() {
 
   const [activeTab, setActiveTab] = useState('Description')
   const [selectedSize, setSelectedSize] = useState(null)
-  const [wishlisted, setWishlisted] = useState(false)
+  const [wishlisted, setWishlisted] = useState(() => product ? isWishlisted(product.id) : false)
+  const [addedToast, setAddedToast] = useState(false)
+
+  const handleToggleWishlist = () => {
+    if (!product) return
+    const nowWishlisted = toggleWishlistItem(product)
+    setWishlisted(nowWishlisted)
+  }
+
+  const handleAddToCart = () => {
+    if (!product) return
+    const sizeToUse = selectedSize || (product.sizes && product.sizes[0]) || 'Standard'
+    addToCart(product, sizeToUse)
+    setAddedToast(true)
+    setTimeout(() => setAddedToast(false), 2000)
+  }
+
+  const handleBuyNow = () => {
+    handleAddToCart()
+    navigate('/cart')
+  }
 
   if (!product) {
     return (
@@ -87,10 +110,10 @@ export default function ProductDetail() {
             </div>
             <button
               className={`pd-wishlist ${wishlisted ? 'active' : ''}`}
-              onClick={() => setWishlisted(w => !w)}
+              onClick={handleToggleWishlist}
               aria-label="Add to wishlist"
             >
-              <img src={heartIcon} alt="Wishlist" />
+              <img src={wishlisted ? RedHeartIcon : WhiteHeartIcon} alt="Wishlist" />
             </button>
           </div>
 
@@ -112,8 +135,10 @@ export default function ProductDetail() {
             </div>
           )}
 
-          <button className="pd-btn-buy">Buy Now</button>
-          <button className="pd-btn-cart">Add to Cart</button>
+          <button className="pd-btn-buy" onClick={handleBuyNow}>Buy Now</button>
+          <button className="pd-btn-cart" onClick={handleAddToCart}>
+            {addedToast ? 'Added to Bag ✓' : 'Add to Cart'}
+          </button>
 
           <div className="pd-tabs">
             {TABS.map(tab => (
