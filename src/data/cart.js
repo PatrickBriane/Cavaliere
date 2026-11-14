@@ -13,8 +13,8 @@ export const saveCart = (items) => {
   try {
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items))
     window.dispatchEvent(new Event('cartUpdated'))
-  } catch {
-    // ignore
+  } catch (e) {
+    void e
   }
 }
 

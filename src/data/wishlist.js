@@ -1,9 +1,20 @@
+import { products } from './products.js'
+
 const WISHLIST_KEY = 'cavaliere_wishlist'
 
 export const getWishlist = () => {
   try {
     const raw = localStorage.getItem(WISHLIST_KEY)
-    return raw ? JSON.parse(raw) : []
+    const list = raw ? JSON.parse(raw) : []
+    return list.map(item => {
+      if (!item.slug) {
+        const found = products.find(p => p.id === item.id)
+        if (found) {
+          return { ...item, slug: found.slug }
+        }
+      }
+      return item
+    })
   } catch {
     return []
   }
@@ -28,6 +39,7 @@ export const toggleWishlistItem = (product) => {
   } else {
     current.push({
       id: product.id,
+      slug: product.slug,
       name: product.name,
       price: product.price,
       image: product.image,

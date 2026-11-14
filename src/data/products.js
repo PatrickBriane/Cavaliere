@@ -99,5 +99,5 @@ export const products = [
   },
 ]
 
-export const getProductBySlug = (slug) => products.find(p => p.slug === slug)
+export const getProductBySlug = (slug) => products.find(p => p.slug === slug || String(p.id) === String(slug))
 export const getProductById = (id) => products.find(p => p.id === Number(id))

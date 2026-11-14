@@ -196,7 +196,7 @@ export default function Cart() {
               <div className="wishlist-grid">
                 {wishlistItems.map(item => (
                   <div key={item.id} className="wishlist-card">
-                    <Link to={`/product/${item.id}`} className="wishlist-card-link">
+                    <Link to={`/product/${item.slug || item.id}`} className="wishlist-card-link">
                       <div className="wishlist-card-img-wrap">
                         <img src={item.image} alt={item.name} className="wishlist-card-img" />
                       </div>
